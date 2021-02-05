@@ -1,2 +1,5 @@
-<h1>Packs#index</h1>
-<p>Find me in app/views/packs/index.html.erb</p>
+<h1>ガチャシミュレーターTOP</h1>
+
+<% @packs.each do |pack| %>
+  <%= pack.pack_name %>
+<% end %>
