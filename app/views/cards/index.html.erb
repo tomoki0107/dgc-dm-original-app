@@ -1,6 +1,6 @@
 <h1>カード一覧画面</h1>
 
 <% @cards.each do |card| %>
-  <%= card.name %>
+  <%=link_to card.name, card_path(card) %>
   <%= card.race %>
 <% end %>
