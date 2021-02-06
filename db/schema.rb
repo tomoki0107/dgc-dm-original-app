@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_175340) do
+ActiveRecord::Schema.define(version: 2021_02_06_130327) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.text "content"
@@ -25,6 +25,24 @@ ActiveRecord::Schema.define(version: 2021_02_05_175340) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pack_card_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "card_name"
+    t.integer "weight"
+    t.bigint "pack_rarity_rate_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pack_rarity_rate_id"], name: "index_pack_card_rates_on_pack_rarity_rate_id"
+  end
+
+  create_table "pack_rarity_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "rarity"
+    t.integer "weight"
+    t.bigint "pack_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pack_id"], name: "index_pack_rarity_rates_on_pack_id"
   end
 
   create_table "packs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -46,4 +64,6 @@ ActiveRecord::Schema.define(version: 2021_02_05_175340) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pack_card_rates", "pack_rarity_rates"
+  add_foreign_key "pack_rarity_rates", "packs"
 end
