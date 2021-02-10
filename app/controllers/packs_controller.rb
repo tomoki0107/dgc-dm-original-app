@@ -5,10 +5,11 @@ class PacksController < ApplicationController
   end
 
   def show
-    @pack = Pack.find(params[:id])
-    @pack_rarity_rates = @pack.pack_rarity_rates
-    @rarity_lottery = Pack.rarity_lottery(@pack_rarity_rates)
-    @pack_card_rates = @rarity_lottery.pack_card_rates
+    pack = Pack.find(params[:id])
+    pack_rarity_rates = pack.pack_rarity_rates
+    rarity_lottery = Pack.rarity_lottery(pack_rarity_rates)
+    pack_card_rates = rarity_lottery.pack_card_rates
+    @card_lottery = Pack.card_lottery(pack_card_rates)
   end
 
   private

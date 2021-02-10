@@ -3,17 +3,21 @@ class Pack < ApplicationRecord
 
   def self.rarity_lottery(pack_rarity_rates)
     rarity = rand(200)
-    if rarity < 3 #rarityの数値が取得したレアリティテーブルの先頭のweightカラムの値より小さければ
-      return pack_rarity_rates.limit(1)
-    elsif rarity < 12 #rarityの数値が取得したレアリティテーブルの2番目のweightカラムの値より小さければ
-      return pack_rarity_rates.limit(1).offset(1)
-    elsif rarity < 36 #rarityの数値が取得したレアリティテーブルの3番目のweightカラムの値より小さければ
-      return pack_rarity_rates.limit(1).offset(2)
-    elsif rarity < 96 #rarityの数値が取得したレアリティテーブルの4番目のweightカラムの値より小さければ
-      return pack_rarity_rates.limit(1).offset(3)
-    else  #rarityの数値が取得したレアリティテーブルの5番目のweightカラムの値より小さければ
-      return pack_rarity_rates.limit(1).offset(4)
+    if rarity < 3
+      return pack_rarity_rates.first
+    elsif rarity < 12
+      return pack_rarity_rates.second
+    elsif rarity < 36
+      return pack_rarity_rates.third
+    elsif rarity < 96
+      return pack_rarity_rates.fourth
+    else  
+      return pack_rarity_rates.fifth
     end
   end
   
+  def self.card_lottery(pack_card_rates)
+    return pack_card_rates.sample
+  end
+
 end
