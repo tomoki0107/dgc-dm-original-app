@@ -19,7 +19,20 @@ class Pack < ApplicationRecord
   end
   
   def self.card_lottery(pack_card_rates)
-    return pack_card_rates.sample
+    ids = pack_card_rates.pluck(:id)
+    weights = pack_card_rates.pluck(:card_weight)
+    total_weight = weights.inject(:+)
+    pick = nil
+    rnd = rand(total_weight)
+  
+    weights.each_with_index do |item, i|
+      if rnd < weights[i]
+        pick = i
+        break
+      end
+      rnd -= weights[i]
+    end
+    return pack_card_rates.find(ids[pick])
   end
 
 end
