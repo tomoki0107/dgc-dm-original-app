@@ -1,5 +1,5 @@
 <h1>ガチャシミュレーターTOP</h1>
 
 <% @packs.each do |pack| %>
-  <%= pack.pack_name %>
+  <%=link_to "#{pack.pack_name}を引く", pack_path(pack) %>
 <% end %>

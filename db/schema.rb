@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_130327) do
   create_table "packs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "pack_name"
     t.string "pack_image"
+    t.integer "pack_num"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
