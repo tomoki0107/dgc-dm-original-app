@@ -1,4 +1,6 @@
 リザルト画面
 <% @card.each do |card| %>
-  <%= card.card_name %>
+  <%= link_to card_path(card.card_number) do %>
+    <%= card.pack_rarity_rate.rarity %>:<%= card.card_name %>
+  <% end %>
 <% end %>

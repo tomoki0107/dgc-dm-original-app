@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_02_06_130327) do
 
   create_table "pack_card_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "card_name"
+    t.integer "card_number"
     t.integer "weight"
     t.bigint "pack_rarity_rate_id"
     t.datetime "created_at", precision: 6, null: false
