@@ -2,3 +2,6 @@
 
 <%= link_to "#{@article.title}のデッキレシピのURL", @article.deck_url %>
 <%= @article.content %>
+<% if @article.user.id == current_user.id %>
+  <%= link_to "編集", edit_article_path(@article) %>
+<% end %>
