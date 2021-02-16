@@ -1,7 +1,11 @@
 <h2><%= @article.title %></h2>
+投稿者:<%= @article.user.username %>
 
 <%= link_to "#{@article.title}のデッキレシピのURL", @article.deck_url %>
 <%= @article.content %>
-<% if @article.user.id == current_user.id %>
-  <%= link_to "編集", edit_article_path(@article) %>
+<% if user_signed_in? %>
+  <% if @article.user.id == current_user.id %>
+    <%= link_to "編集", edit_article_path(@article) %>
+    <%= link_to "削除", article_path(@article), method: :delete, data: {confirm: "削除しますか？"}  %>
+  <% end %>
 <% end %>
