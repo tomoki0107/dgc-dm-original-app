@@ -4,7 +4,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string :title
       t.text   :deck_url
       t.text   :content
-      t.references :user
+      t.references :user, foreign_key: true
       t.timestamps
     end
   end
