@@ -1,8 +1,10 @@
-Article.create(
-  title: '青白グレートメカオー',
-  deck_url: 'https://dmps.takaratomy.co.jp/deckbuilder/deck/?c=PUC3.PUC3.PUC3.PUC3.DEC5.DEC5.DEC5.DEC5.V4C4.V4C4.V4C4.V4C4.PUC2.PUC2.PUC2.4EC2.4EC2.4EC2.4EC2.JMC3.JMC3.JMC3.JMC3.PUC4.PUC4.PUC4.PUC4.DEC2.DEC2.DEC2.DEC2.DECG.DECG.DECG.V4C3.V4C3.PUAK.PUAK.PUAK.PUAK&k=DEC2',
-  content: 'バトルアリーナ3rdの準優勝のデッキレシピになります。'
-)
+User.all.each do |user|
+  user.articles.create(
+    title: '青単ツヴァイランサー',
+    deck_url: 'https://dmps.takaratomy.co.jp/deckbuilder/deck/?c=PUC3.PUC3.PUC3.PUC3.DEC5.DEC5.DEC5.DEC5.V4C4.V4C4.V4C4.V4C4.PUC2.PUC2.PUC2.4EC2.4EC2.4EC2.4EC2.JMC3.JMC3.JMC3.JMC3.PUC4.PUC4.PUC4.PUC4.DEC2.DEC2.DEC2.DEC2.DECG.DECG.DECG.V4C3.V4C3.PUAK.PUAK.PUAK.PUAK&k=DEC2',
+    content: 'ALLで環境トップです。'
+  )
+end
 
 Card.create(name: 'SR1-1')
 Card.create(name: 'SR1-2')
