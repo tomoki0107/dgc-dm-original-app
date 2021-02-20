@@ -20,6 +20,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @article_comment = ArticleComment.new
+    @article_comments  = @article.article_comments.includes(:user)
   end
 
   def edit
