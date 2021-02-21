@@ -15,10 +15,8 @@
   <p>
     <strong><%= comment.user.username %>：</strong>
     <%= comment.text %>
-    <% if user_signed_in? %>
-      <% if current_user.id == comment.user.id %>
-        <%= link_to "削除", card_card_comment_path(@card, comment), method: :delete, data: {confirm: "削除しますか？"} %>
-      <% end %>
+    <% if user_signed_in? && current_user.id == comment.user.id %>
+      <%= link_to "削除", card_card_comment_path(@card, comment), method: :delete, data: {confirm: "削除しますか？"} %>
     <% end %>
   </p>
 <% end %>

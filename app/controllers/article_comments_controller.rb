@@ -1,13 +1,13 @@
 class ArticleCommentsController < ApplicationController
   def create
     article_comment = ArticleComment.create(article_comment_params)
-    redirect_to "/articles/#{article_comment.article.id}"
+    redirect_to article_path(article_comment.article.id)
   end
   
   def destroy
     article_comment = ArticleComment.find(params[:id])
     article_comment.destroy
-    redirect_to "/articles/#{article_comment.article.id}"
+    redirect_to article_path(article_comment.article.id)
   end
 
   private
