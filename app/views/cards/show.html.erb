@@ -1,1 +1,22 @@
 <h2><%= @card.name %>の詳細画面</h2>
+
+<% if user_signed_in? %>
+  <%= form_with(model: [@card, @card_comment], local: true) do |form| %>
+    <%= form.text_area :text, placeholder: "コメントする" %>
+    <%= form.submit "SEND" %>
+  <% end %>
+<% else %>
+  <strong><p>※ コメントの投稿には新規登録/ログインが必要です ※</p>
+  </strong>
+<% end %>
+
+<h4>＜コメント一覧＞</h4>
+<% @card_comments.each do |comment| %>
+  <p>
+    <strong><%= comment.user.username %>：</strong>
+    <%= comment.text %>
+    <% if user_signed_in? && current_user.id == comment.user.id %>
+      <%= link_to "削除", card_card_comment_path(@card, comment), method: :delete, data: {confirm: "削除しますか？"} %>
+    <% end %>
+  </p>
+<% end %>
