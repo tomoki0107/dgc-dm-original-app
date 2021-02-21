@@ -4,6 +4,12 @@ class CardCommentsController < ApplicationController
     redirect_to "/cards/#{card_comment.card.id}"
   end
 
+  def destroy
+    card_comment = CardComment.find(params[:id])
+    card_comment.destroy
+    redirect_to "/cards/#{card_comment.card.id}"
+  end
+
   private
 
   def card_comment_params

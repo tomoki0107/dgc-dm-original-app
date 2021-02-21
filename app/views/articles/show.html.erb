@@ -25,5 +25,10 @@
   <p>
     <strong><%= comment.user.username %>：</strong>
     <%= comment.text %>
+    <% if user_signed_in? %>
+      <% if current_user.id == comment.user.id %>
+        <%= link_to "削除", article_article_comment_path(@article, comment), method: :delete, data: {confirm: "削除しますか？"} %>
+      <% end %>
+    <% end %>
   </p>
 <% end %>
