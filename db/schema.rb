@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_02_20_143737) do
 
   create_table "article_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.text "text"
+    t.text "text", null: false
     t.bigint "user_id"
     t.bigint "article_id"
     t.datetime "created_at", precision: 6, null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_143737) do
   end
 
   create_table "card_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.text "text"
+    t.text "text", null: false
     t.bigint "user_id"
     t.bigint "card_id"
     t.datetime "created_at", precision: 6, null: false
