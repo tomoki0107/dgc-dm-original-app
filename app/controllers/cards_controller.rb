@@ -10,4 +10,8 @@ class CardsController < ApplicationController
     @card_comments  = @card.card_comments.includes(:user)
   end
 
+  def search
+    @cards = Card.search(params[:keyword])
+  end
+
 end

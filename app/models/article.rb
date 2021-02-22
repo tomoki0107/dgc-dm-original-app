@@ -7,4 +7,13 @@ class Article < ApplicationRecord
     validates :deck_url
     validates :content
   end
+
+  def self.search(search)
+    if search != ""
+      Article.where('title LIKE(?)', "%#{search}%")
+    else
+      Article.all
+    end
+  end
+
 end
