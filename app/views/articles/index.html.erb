@@ -2,4 +2,5 @@
 
 <% @articles.each do |article| %>
   <%= link_to "#{article.title}", article_path(article) %>
+  投稿者:<%= link_to article.user.username, user_path(article.user.id) %>
 <% end %>
