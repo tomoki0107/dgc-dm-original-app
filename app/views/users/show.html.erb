@@ -1,4 +1,9 @@
 <h1>マイページ</h1>
+<% if @user.profile_image.attached? %>
+  <%= image_tag @user.profile_image.variant(resize: '100x100') %>
+<% else %>
+  <%= image_tag ("no-image.png") %>
+<% end %>
 <%= @user.username %>
 <%= @user.profile %>
 <% if @user.id == current_user.id %>
