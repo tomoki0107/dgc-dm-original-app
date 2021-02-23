@@ -8,9 +8,9 @@ class Article < ApplicationRecord
     validates :content
   end
 
-  def self.search(search)
-    if search != ""
-      Article.where('title LIKE(?)', "%#{search}%")
+  def self.search(keyword)
+    if keyword != ""
+      Article.where('title LIKE(?)', "%#{keyword}%")
     else
       Article.all
     end
