@@ -43,6 +43,10 @@ class ArticlesController < ApplicationController
     article.destroy
     redirect_to root_path
   end
+
+  def search
+    @articles = Article.search(params[:keyword])
+  end
   
   private
 
