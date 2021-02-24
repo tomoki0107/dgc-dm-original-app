@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_112312) do
+ActiveRecord::Schema.define(version: 2021_02_24_015043) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -100,6 +100,16 @@ ActiveRecord::Schema.define(version: 2021_02_22_112312) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "user_id"
+    t.bigint "card_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_reviews_on_card_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "username", null: false
     t.string "email", default: "", null: false
@@ -123,4 +133,6 @@ ActiveRecord::Schema.define(version: 2021_02_22_112312) do
   add_foreign_key "pack_card_rates", "cards"
   add_foreign_key "pack_card_rates", "pack_rarity_rates"
   add_foreign_key "pack_rarity_rates", "packs"
+  add_foreign_key "reviews", "cards"
+  add_foreign_key "reviews", "users"
 end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :card_comments, dependent: :destroy
   has_many :article_comments, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_one_attached :profile_image
 
   validates :username, presence: true

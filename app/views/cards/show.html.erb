@@ -1,5 +1,34 @@
 <h2><%= @card.name %>の詳細画面</h2>
 
+<div class="average-score">
+  <div class="star-rating mb-2">
+    <div class="star-rating-front" style="width: <%= @card.review_score_percentage %>%">★★★★★</div>
+    <div class="star-rating-back">★★★★★</div>
+  </div>
+  <div class="average-score-display ml-3 pt-2">
+    <%= @card.avg_score %>点（<%= @card.reviews.count %>件）
+  </div>
+</div>
+
+<p>このカードの評価を行えます(※ログイン済みのユーザーのみ)</p>
+<div class="rating-box mt-3">
+  <%= form_with model: @review, url: card_reviews_path(@card), local: true do |f| %>
+    <div class="main-rating">
+      <div class="ratings mb-3">
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+      </div>
+      <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
+    </div>
+    <%= f.hidden_field :card_id, value: @card.id %>
+    <%= f.hidden_field :score, id: "rating-value" %>
+    <%= f.submit "評価する" %>
+  <% end %>
+</div>
+
 <% if user_signed_in? %>
   <%= form_with(model: [@card, @card_comment], local: true) do |form| %>
     <%= form.text_area :text, placeholder: "コメントする" %>
@@ -20,3 +49,5 @@
     <% end %>
   </p>
 <% end %>
+
+<%= javascript_pack_tag 'application' %>
