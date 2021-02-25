@@ -9,6 +9,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:score).merge(user_id: current_user.id, card_id: params[:card_id])
+    params.require(:review).permit(:score, :card_id).merge(user_id: current_user.id)
   end
 end
