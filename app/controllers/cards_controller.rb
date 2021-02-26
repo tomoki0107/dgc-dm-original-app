@@ -6,6 +6,7 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
+    @review = Review.new
     @card_comment = CardComment.new
     @card_comments  = @card.card_comments.includes(:user)
   end

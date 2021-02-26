@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :cards, only: [:index, :show, :search] do
+    resources :reviews, only: [:create]
     resources :card_comments, only: [:create, :destroy]
     collection do
       get 'search'
