@@ -6,7 +6,18 @@ User.all.each do |user|
   )
 end
 
-Card.create(name: 'SR1-1')
+Card.create(
+  name: '聖霊王アルカディアス',
+  card_image: 'https://lh3.googleusercontent.com/_zQ5rueCs7pQggHPKcmOd6qiSj1aa5NH1VC-SH462ZkmQ_vMmLOrmAq_1K26ROnegn8kuOSxwCZcsOEVjf8-iga7LoO1BTSlqZ3uQh9W-Q7k=w200',
+  category: '進化クリーチャー',
+  race: 'エンジェル・コマンド',
+  civilization: '光',
+  rarity: 'SR',
+  cost: '6',
+  power: '11500',
+  effect: '■進化－エンジェル・コマンド
+  W・ブレイカー
+  ■誰も光以外の呪文を唱えられない。')
 Card.create(name: 'SR1-2')
 Card.create(name: 'SR1-3')
 Card.create(name: 'SR1-4')
