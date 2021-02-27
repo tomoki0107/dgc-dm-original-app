@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 2021_02_24_015043) do
 
   create_table "pack_card_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "card_name"
-    t.text "card_image"
     t.bigint "card_id"
     t.integer "weight"
     t.bigint "pack_rarity_rate_id"
