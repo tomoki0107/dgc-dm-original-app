@@ -1,7 +1,7 @@
 リザルト画面
 <% @pack_cards.each do |pack_card| %>
-  <%= pack_card.card.card_image %>
+  <%= image_tag pack_card.card.card_image %>
   <%= link_to card_path(pack_card.card_id) do %>
-    <%= pack_card.pack_rarity_rate.rarity %>:<%= pack_card.card_name %>
+    <%= pack_card.pack_rarity_rate.rarity %>:<%= pack_card.card.name %>
   <% end %>
 <% end %>
