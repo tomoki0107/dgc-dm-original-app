@@ -65,9 +65,14 @@ ActiveRecord::Schema.define(version: 2021_02_24_015043) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.string "card_image"
+    t.text "card_image"
+    t.string "category"
     t.string "race"
-    t.string "type"
+    t.string "civilization"
+    t.string "rarity"
+    t.string "cost"
+    t.string "power"
+    t.text "effect"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

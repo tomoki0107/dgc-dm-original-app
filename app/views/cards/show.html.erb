@@ -1,4 +1,5 @@
 <h2><%= @card.name %>の詳細画面</h2>
+<%= image_tag @card.card_image %>
 
 <div class="average-score">
   <div class="star-rating mb-2">
@@ -9,6 +10,14 @@
     <%= @card.avg_score %>点（<%= @card.reviews.count %>件）
   </div>
 </div>
+
+タイプ:<%= @card.category %>
+種族:<%= @card.race %>
+文明:<%= @card.civilization %>
+レアリティ:<%= @card.rarity %>
+コスト:<%= @card.cost %>
+パワー:<%= @card.power %>
+効果:<%= safe_join(@card.effect.split("\n"), tag(:br)) %>
 
 <p>このカードの評価を行えます(※ログイン済みのユーザーのみ)</p>
 <div class="rating-box mt-3">
