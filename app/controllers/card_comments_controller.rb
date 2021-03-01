@@ -1,4 +1,6 @@
 class CardCommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     card_comment = CardComment.create(card_comment_params)
     redirect_to card_path(card_comment.card.id)

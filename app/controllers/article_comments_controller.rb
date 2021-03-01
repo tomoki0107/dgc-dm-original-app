@@ -1,4 +1,6 @@
 class ArticleCommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     article_comment = ArticleComment.create(article_comment_params)
     redirect_to article_path(article_comment.article.id)
