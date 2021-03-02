@@ -64,23 +64,23 @@ ActiveRecord::Schema.define(version: 2021_02_24_015043) do
   end
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.text "card_image"
-    t.string "category"
-    t.string "race"
-    t.string "civilization"
-    t.string "rarity"
-    t.string "cost"
-    t.string "power"
-    t.text "effect"
+    t.string "name", null: false
+    t.text "card_image", null: false
+    t.string "category", null: false
+    t.string "race", null: false
+    t.string "civilization", null: false
+    t.string "rarity", null: false
+    t.string "cost", null: false
+    t.string "power", null: false
+    t.text "effect", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "pack_card_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "card_name"
+    t.string "card_name", null: false
     t.bigint "card_id"
-    t.integer "weight"
+    t.integer "weight", null: false
     t.bigint "pack_rarity_rate_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 2021_02_24_015043) do
   end
 
   create_table "pack_rarity_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "rarity"
-    t.integer "weight"
+    t.string "rarity", null: false
+    t.integer "weight", null: false
     t.bigint "pack_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -98,15 +98,15 @@ ActiveRecord::Schema.define(version: 2021_02_24_015043) do
   end
 
   create_table "packs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "pack_name"
+    t.string "pack_name", null: false
     t.string "pack_image"
-    t.integer "pack_num"
+    t.integer "pack_num", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "score"
+    t.integer "score", null: false
     t.bigint "user_id"
     t.bigint "card_id"
     t.datetime "created_at", precision: 6, null: false
