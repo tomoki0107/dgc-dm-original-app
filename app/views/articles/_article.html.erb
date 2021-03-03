@@ -1,0 +1,9 @@
+<%= form_with(url: search_articles_path, local: true, method: :get) do |form| %>
+  <%= form.text_field :keyword, placeholder: "投稿を検索する" %>
+  <%= form.submit "検索" %>
+<% end %>
+
+<% articles.each do |article| %>
+  <%= link_to "#{article.title}", article_path(article) %>
+  投稿者:<%= link_to article.user.username, user_path(article.user.id) %>
+<% end %>

@@ -1,7 +1,7 @@
 class Card < ApplicationRecord
   has_many :card_comments, dependent: :destroy
   has_many :reviews , dependent: :destroy
-  has_many :pack_rarity_rates
+  has_many :pack_card_rates
 
   def self.search(keyword)
     if keyword != ""

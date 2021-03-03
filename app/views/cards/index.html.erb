@@ -1,11 +1,3 @@
 <h1>カード一覧画面</h1>
 
-<%= form_with(url: search_cards_path, local: true, method: :get) do |form| %>
-  <%= form.text_field :keyword, placeholder: "カードを検索する" %>
-  <%= form.submit "検索" %>
-<% end %>
-
-<% @cards.each do |card| %>
-  <%=link_to card.name, card_path(card) %>
-  <%= card.race %>
-<% end %>
+<%= render partial: "card", locals: { cards: @cards } %>

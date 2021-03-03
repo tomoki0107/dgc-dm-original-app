@@ -1,16 +1,3 @@
 <h1>編集画面</h1>
 
-<%= form_with(model: @article, local: true) do |f| %>
-
-  <%= f.label :title, "タイトル" %>
-  <%= f.text_field :title %>
-
-  <%= f.label :deck_url, "デッキのURL" %>
-  <%= f.text_field :deck_url %>
-
-  <%= f.label :content, "解説・立ち回り" %>
-  <%= f.text_area :content %>
-
-  <%= f.submit '更新' %>
-  
-<% end %>
+<%= render partial: "form", locals: { article: @article, send: '更新' } %>

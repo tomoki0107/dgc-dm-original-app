@@ -10,9 +10,9 @@ class Article < ApplicationRecord
 
   def self.search(keyword)
     if keyword != ""
-      Article.where('title LIKE(?)', "%#{keyword}%")
+      Article.where('title LIKE(?)', "%#{keyword}%").includes(:user)
     else
-      Article.all
+      Article.includes(:user)
     end
   end
 
