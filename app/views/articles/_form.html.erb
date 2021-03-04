@@ -1,14 +1,24 @@
+<%= link_to "デッキ登録はこちらから", "https://dmps.takaratomy.co.jp/deckbuilder/" %>
+
 <%= form_with(model: article, local: true) do |f| %>
 
-  <%= f.label :title, "タイトル" %>
-  <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
 
-  <%= f.label :deck_url, "デッキのURL" %>
-  <%= f.text_field :deck_url %>
+  <div class="form-group">
+    <%= f.label :deck_url, "デッキのURL" %>
+    <%= f.text_field :deck_url, class: 'form-control' %>
+  </div>
 
-  <%= f.label :content, "解説・立ち回り" %>
-  <%= f.text_area :content %>
+  <div class="form-group mb-5">
+    <%= f.label :content, "解説・立ち回り" %>
+    <%= f.text_area :content, class: 'form-control', rows: "5" %>
+  </div>
 
-  <%= f.submit send %>
-  
+  <div class="form-group">
+    <%= f.submit send, class: 'btn btn-warning btn-block' %>
+  </div>
+
 <% end %>
