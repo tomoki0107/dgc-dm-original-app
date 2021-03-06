@@ -5,16 +5,16 @@ class PacksController < ApplicationController
   end
 
   def show
-    pack = Pack.find(params[:id])
-    pack_rarity_rates = pack.pack_rarity_rates
+    @pack = Pack.find(params[:id])
+    pack_rarity_rates = @pack.pack_rarity_rates
     @pack_cards = []
-    if pack.pack_num == 1
+    if @pack.pack_num == 1
       5.times do
         rarity_lottery = Pack.lottery(pack_rarity_rates)
         card_lottery = Pack.lottery(rarity_lottery.pack_card_rates)
         @pack_cards << card_lottery
       end
-    else pack.pack_num == 10
+    else @pack.pack_num == 10
       50.times do
         rarity_lottery = Pack.lottery(pack_rarity_rates)
         card_lottery = Pack.lottery(rarity_lottery.pack_card_rates)
