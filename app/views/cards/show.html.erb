@@ -1,60 +1,127 @@
-<h2><%= @card.name %>の詳細画面</h2>
-<%= image_tag @card.card_image %>
-
-<div class="average-score">
-  <div class="star-rating mb-2">
-    <div class="star-rating-front" style="width: <%= @card.review_score_percentage %>%">★★★★★</div>
-    <div class="star-rating-back">★★★★★</div>
-  </div>
-  <div class="average-score-display ml-3 pt-2">
-    <%= @card.avg_score %>点（<%= @card.reviews.count %>件）
-  </div>
-</div>
-
-タイプ:<%= @card.category %>
-種族:<%= @card.race %>
-文明:<%= @card.civilization %>
-レアリティ:<%= @card.rarity %>
-コスト:<%= @card.cost %>
-パワー:<%= @card.power %>
-効果:<%= safe_join(@card.effect.split("\n"), tag(:br)) %>
-
-<p>このカードの評価を行えます(※ログイン済みのユーザーのみ)</p>
-<div class="rating-box mt-3">
-  <%= form_with model: @review, url: card_reviews_path(@card), local: true do |f| %>
-    <div class="main-rating">
-      <div class="ratings mb-3">
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-      </div>
-      <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
+<div class="container bg-white mt-4 py-5 w-75">
+  <h2 class="text-center mb-5"><%= @card.name %>の詳細画面</h2>
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag @card.card_image, class: "d-block mx-auto pt-5" %>
     </div>
-    <%= f.hidden_field :card_id, value: @card.id %>
-    <%= f.hidden_field :score, id: "rating-value" %>
-    <%= f.submit "評価する" %>
-  <% end %>
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead class="bg-secondary">
+          <tr>
+            <th class="text-light text-center" scope="col" colspan="4"><%= @card.name %>の基本情報</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-center align-middle" scope="row">評価</th>
+            <td colspan="4">
+              <div class="d-flex justify-content-center">
+                <div class="star-rating mb-2">
+                  <div class="star-rating-front" style="width: <%= @card.review_score_percentage %>%">★★★★★</div>
+                  <div class="star-rating-back">★★★★★</div>
+                </div>
+                <div class="average-score-display ml-3 pt-2">
+                  <%= @card.avg_score %>点（<%= @card.reviews.count %>件）
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th class="text-center">種族</th>
+            <td class="text-center"><%= @card.race %></th>
+            <th class="text-center">タイプ</th>
+            <td class="text-center"><%= @card.category %></th>
+          </tr>
+          <tr>
+            <th class="text-center">文明</th>
+            <td class="text-center"><%= @card.civilization %></td>
+            <th class="text-center">レア度</th>
+            <td class="text-center"><%= @card.rarity %></td>
+          </tr>
+          <tr>
+            <th class="text-center">コスト</th>
+            <td class="text-center"><%= @card.cost %></td>
+            <th class="text-center">パワー</th>
+            <td class="text-center"><%= @card.power %></td>
+          </tr>
+          <tr>
+            <th class="text-center" colspan="4">効果</th>
+          </tr>
+          <tr>
+            <td colspan="4"><%= safe_join(@card.effect.split("\n"), tag(:br)) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card text-center w-75 d-block mx-auto">
+    <div class="card-header">
+      このカードの評価を行えます(※ログイン済みのユーザーのみ)
+    </div>
+    <div class="card-body">
+      <div class="rating-box mt-3">
+        <%= form_with model: @review, url: card_reviews_path(@card), local: true do |f| %>
+          <div class="d-flex justify-content-center">
+            <div class="ratings mb-3">
+              <span class="fa fa-star-o" id="star"></span>
+              <span class="fa fa-star-o" id="star"></span>
+              <span class="fa fa-star-o" id="star"></span>
+              <span class="fa fa-star-o" id="star"></span>
+              <span class="fa fa-star-o" id="star"></span>
+            </div>
+            <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
+          </div>
+          <%= f.hidden_field :card_id, value: @card.id %>
+          <%= f.hidden_field :score, id: "rating-value" %>
+          <%= f.submit "評価する", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<% if user_signed_in? %>
-  <%= form_with(model: [@card, @card_comment], local: true) do |form| %>
-    <%= form.text_area :text, placeholder: "コメントする" %>
-    <%= form.submit "SEND" %>
-  <% end %>
-<% else %>
-  <strong><p>※ コメントの投稿には新規登録/ログインが必要です ※</p>
-  </strong>
-<% end %>
 
-<h4>＜コメント一覧＞</h4>
-<% @card_comments.each do |comment| %>
-  <p>
-    <strong><%= comment.user.username %>：</strong>
-    <%= comment.text %>
-    <% if user_signed_in? && current_user.id == comment.user.id %>
-      <%= link_to "削除", card_card_comment_path(@card, comment), method: :delete, data: {confirm: "削除しますか？"} %>
+<div class="container-fluid my-5 py-2 mw-md">
+  <h4 class="bg-dark text-light my-4 pl-4">コメント</h4>
+  <% if user_signed_in? %>
+    <%= form_with(model: [@card, @card_comment], local: true) do |form| %>
+
+      <div class="form-group">
+        <%= form.text_area :text, placeholder: "コメントする", class: 'form-control', rows: "5" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "コメントを投稿する", class: "btn btn-success btn-block" %>
+      </div>
     <% end %>
-  </p>
-<% end %>
+  <% else %>
+    <strong><p class="text-center">※ コメントの投稿には新規登録/ログインが必要です ※</p>
+    </strong>
+  <% end %>
+
+  <div class="comments">
+    <h5 class="my-4 pl-4">＜コメント一覧＞</h5>
+    <% if @card_comments.count == 0 %>
+      <h5 class="text-center gray">まだコメントがありません</h5>
+    <% else %>
+      <% @card_comments.each do |comment| %>
+        <section class="co-Item">
+          <div class="co-Item_header">
+            <%= link_to comment.user.username, user_path(comment.user) %>
+            <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %>
+          </div>
+          <div class="co-Item_text">
+            <p>
+              <%= safe_join(comment.text.split("\n"), tag(:br)) %>
+            </p>
+          </div>
+          <div class="text-right">
+            <% if user_signed_in? && current_user.id == comment.user.id %>
+              <%= link_to "削除", card_card_comment_path(@card, comment), class: "delete", method: :delete, data: {confirm: "削除しますか？"} %>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
+    <% end %>
+  </div>
+</div>
