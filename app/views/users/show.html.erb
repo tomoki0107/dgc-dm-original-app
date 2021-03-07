@@ -1,19 +1,61 @@
-<h1>マイページ</h1>
-<% if @user.profile_image.attached? %>
-  <%= image_tag @user.profile_image.variant(resize: '100x100') %>
-<% else %>
-  <%= image_tag ("no-image.png") %>
-<% end %>
-<%= @user.username %>
-<%= @user.profile %>
-<% if user_signed_in? && @user.id == current_user.id %>
-  <%= link_to "編集", edit_user_path(@user) %>
-<% end %>
-
-<% @user.articles.each do |article| %>
-  <%= link_to article.title, article_path(article.id) %>
-  <% if user_signed_in? && article.user.id == current_user.id %>
-    <%= link_to "編集", edit_article_path(article) %>
-    <%= link_to "削除", article_path(article), method: :delete, data: {confirm: "削除しますか？"}  %>
-  <% end %>
-<% end %>
+<div class="container mt-4 py-5 w-75">
+  <h1 class="text-center">マイページ</h1>
+  <div class="row pt-4">
+    <div class="col-4">
+      <div class="card" style="width: 20rem;">
+        <figure class="text-center my-4">
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image.variant(combine_options:{gravity: :center, resize:"100x100^", crop:"100x100+0+0"}), class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag ("no-image.png"), class: "image-size rounded-circle" %>
+        <% end %>
+        </figure>
+        <div class="card-body">
+          <h5 class="card-title text-center co-Item"><%= @user.username %></h5>
+          <% if @user.profile.blank? %>
+            <h6 class="py-4 text-center gray">まだプロフィールがありません</h6>
+          <% else %>
+            <p class="card-text py-4"><%= safe_join(@user.profile.split("\n"), tag(:br)) %></p>
+          <% end %>
+          <% if user_signed_in? && @user.id == current_user.id %>
+            <div class="text-center">
+              <%= link_to "編集", edit_user_path(@user), class: "btn btn-success" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card pb-3">
+        <div class="card-body">
+          <h3 class="card-title text-center py-4 co-Item">投稿記事一覧</h3>
+          <% if @user.articles.count == 0 %>
+            <h5 class="py-4 text-center gray">投稿された記事がありません</h5>
+          <% else %>
+            <% @user.articles.each do |article| %>
+              <div class="d-flex pt-3">
+                <div class="px-4 pb-4">
+                  投稿者:<%= @user.username %>
+                </div>
+                <div class="header-time">
+                  <%= article.created_at.strftime("%Y-%m-%d %H:%M") %>に投稿
+                </div>
+              </div>
+              <div class="d-flex justify-content-between co-Item">
+                <div class="ml-4 pb-4">
+                  <%= link_to article.title, article_path(article.id), class: "dark" %>
+                </div>
+                <div>
+                  <% if user_signed_in? && article.user.id == current_user.id %>
+                    <%= link_to "編集", edit_article_path(article), class: "btn btn-success btn-sm" %>
+                    <%= link_to "削除", article_path(article), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "削除しますか？"}  %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
