@@ -1,8 +1,8 @@
-<div class="container mt-4 py-5 w-75">
+<div class="container mt-4 py-5">
   <h1 class="text-center">マイページ</h1>
   <div class="row pt-4">
-    <div class="col-4">
-      <div class="card" style="width: 20rem;">
+    <div class="col-md-4">
+      <div class="card d-block mx-auto mb-4" style="width: 20rem;">
         <figure class="text-center my-4">
         <% if @user.profile_image.attached? %>
           <%= image_tag @user.profile_image.variant(combine_options:{gravity: :center, resize:"100x100^", crop:"100x100+0+0"}), class: "rounded-circle" %>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-md-8">
       <div class="card pb-3">
         <div class="card-body">
           <h3 class="card-title text-center py-4 co-Item">投稿記事一覧</h3>

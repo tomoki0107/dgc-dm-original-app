@@ -1,10 +1,10 @@
-<div class="container bg-white mt-4 py-5 w-75">
-  <h2 class="text-center mb-5"><%= @card.name %>の詳細画面</h2>
-  <div class="row">
-    <div class="col-4">
-      <%= image_tag @card.card_image, class: "d-block mx-auto pt-5" %>
+<div class="container bg-white mt-4 py-5">
+  <h2 class="text-center mb-5"><%= @card.name %>の詳細</h2>
+  <div class="row pb-5">
+    <div class="col-md-4">
+      <%= image_tag @card.card_image, class: "d-block mx-auto pt-5 mb-5" %>
     </div>
-    <div class="col-8">
+    <div class="col-md-8">
       <table class="table table-bordered">
         <thead class="bg-secondary">
           <tr>

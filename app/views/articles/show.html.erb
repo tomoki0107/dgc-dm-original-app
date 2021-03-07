@@ -1,4 +1,4 @@
-<div class="container bg-white mt-5 py-5 w-75">
+<div class="container-fluid bg-white mt-5 py-5">
   <div class="d-flex">
     <div class="px-4 pb-4">
       投稿者:<%= link_to @article.user.username, user_path(@article.user.id) %>
@@ -9,7 +9,7 @@
   </div>
   <h2 class="pl-4 pb-5 mb-5 co-Item"><%= @article.title %></h2>
 
-  <div class="card border-dark mb-4 w-75 d-block mx-auto">
+  <div class="card border-dark mb-4 d-block mx-auto">
     <div class="card-header"><%= link_to "#{@article.title}のデッキレシピはこちら", @article.deck_url %></div>
     <div class="card-body">
       <p class="card-text"><%= safe_join(@article.content.split("\n"), tag(:br)) %></p>
