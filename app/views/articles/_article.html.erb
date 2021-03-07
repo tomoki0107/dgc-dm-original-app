@@ -1,11 +1,23 @@
-<%= form_with(url: search_articles_path, local: true, method: :get) do |form| %>
-  <%= form.text_field :keyword, placeholder: "投稿を検索する" %>
-  <%= form.submit "検索" %>
-<% end %>
+<div class="py-5 co-Item">
+  <%= form_with(url: search_articles_path, local: true, method: :get) do |form| %>
+    <div class="search">
+      <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "searchTerm" %>
+      <%= form.submit "検索", class: "searchButton" %>
+    </div>
+  <% end %>
+</div>
 
-<% articles.each do |article| %>
-  <table class="table">
-  <%= link_to "#{article.title}", article_path(article) %>
-  投稿者:<%= link_to article.user.username, user_path(article.user.id) %>
-  </table>
+
+<% @articles.each do |article| %>
+  <div class="d-flex pt-3">
+    <div class="px-4 pb-4">
+      投稿者:<%= link_to article.user.username, user_path(article.user.id) %>
+    </div>
+    <div class="header-time">
+      <%= article.created_at.strftime("%Y-%m-%d %H:%M") %>に投稿
+    </div>
+  </div>
+  <div class="ml-4 pb-4 co-Item">
+    <%= link_to article.title, article_path(article.id) %>
+  </div>
 <% end %>
