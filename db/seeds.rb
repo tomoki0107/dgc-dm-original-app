@@ -3268,10 +3268,22 @@ Card.create(
   effect: '■このターン、自分のクリーチャーすべてのパワーを+3000する。
   ■チャージャー')
 
-Pack.create(pack_name: 'DMPP-01:超獣の始動(単発)', pack_num: '1')
-Pack.create(pack_name: 'DMPP-01:超獣の始動(10連)', pack_num: '10')
-Pack.create(pack_name: 'DMPP-02:伝説の再誕(単発)', pack_num: '1')
-Pack.create(pack_name: 'DMPP-02:伝説の再誕(10連)', pack_num: '10')
+Pack.create(
+  pack_name: 'DMPP-01:超獣の始動(単発)',
+  pack_image: 'https://lh3.googleusercontent.com/emv9981LiSTmOZca_wVvXaQeLuODMUtpJR7GtBG5-vp4ulEj0lIoUP4SNTlNOG7JBKBqlZyXr8qa7QXcFoiJtqH0McrJEVZRW4fY2bnN0lRh=rw',
+  pack_num: '1')
+Pack.create(
+  pack_name: 'DMPP-01:超獣の始動(10連)',
+  pack_image: 'https://lh3.googleusercontent.com/emv9981LiSTmOZca_wVvXaQeLuODMUtpJR7GtBG5-vp4ulEj0lIoUP4SNTlNOG7JBKBqlZyXr8qa7QXcFoiJtqH0McrJEVZRW4fY2bnN0lRh=rw',
+  pack_num: '10')
+Pack.create(
+  pack_name: 'DMPP-02:伝説の再誕(単発)',
+  pack_image: 'https://lh3.googleusercontent.com/xv32sEOZVSfzWsu6ldvC49KjTj-c7l0vnj7lyAvcBEF1hMqQlyGqYpBoSnjLox7cn1VLBF5cppo6aBKUR7NBygDfg3rW-T474utPuGIt1IQ=rw',
+  pack_num: '1')
+Pack.create(
+  pack_name: 'DMPP-02:伝説の再誕(10連)',
+  pack_image: 'https://lh3.googleusercontent.com/xv32sEOZVSfzWsu6ldvC49KjTj-c7l0vnj7lyAvcBEF1hMqQlyGqYpBoSnjLox7cn1VLBF5cppo6aBKUR7NBygDfg3rW-T474utPuGIt1IQ=rw',
+  pack_num: '10')
 
 PackRarityRate.create(rarity: 'SR', weight: '3', pack_id: '1')
 PackRarityRate.create(rarity: 'VR', weight: '9', pack_id: '1')
