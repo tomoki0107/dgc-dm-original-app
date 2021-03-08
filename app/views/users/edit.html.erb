@@ -2,7 +2,17 @@
   <h1>ユーザー編集</h1>
 
   <%= form_with(model: @user, local: true) do |f| %>
-  
+
+    <% if @user.errors.any? %>
+      <div class="error-alert">
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+          <li class='error-message'><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
     <div class="form-group">
       <%= f.label :username, "ユーザー名" %>
       <%= f.text_field :username, class: 'form-control' %>

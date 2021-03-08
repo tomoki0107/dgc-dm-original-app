@@ -26,6 +26,16 @@
   <h4 class="bg-dark text-light my-4 pl-4">コメント</h4>
   <% if user_signed_in? %>
     <%= form_with(model: [@article, @article_comment], local: true) do |form| %>
+    
+      <% if @article_comment.errors.any? %>
+      <div class="error-alert">
+        <ul>
+          <% @article_comment.errors.full_messages.each do |message| %>
+          <li class='error-message'><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
 
       <div class="form-group">
         <%= form.text_area :text, placeholder: "コメントする", class: 'form-control', rows: "5" %>

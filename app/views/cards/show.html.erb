@@ -61,6 +61,17 @@
     <div class="card-body">
       <div class="rating-box mt-3">
         <%= form_with model: @review, url: card_reviews_path(@card), local: true do |f| %>
+        
+          <% if @review.errors.any? %>
+          <div class="error-alert">
+            <ul>
+              <% @review.errors.full_messages.each do |message| %>
+              <li class='error-message'><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+
           <div class="d-flex justify-content-center">
             <div class="ratings mb-3">
               <span class="fa fa-star-o" id="star"></span>
@@ -85,6 +96,16 @@
   <h4 class="bg-dark text-light my-4 pl-4">コメント</h4>
   <% if user_signed_in? %>
     <%= form_with(model: [@card, @card_comment], local: true) do |form| %>
+
+      <% if @card_comment.errors.any? %>
+      <div class="error-alert">
+        <ul>
+          <% @card_comment.errors.full_messages.each do |message| %>
+          <li class='error-message'><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
 
       <div class="form-group">
         <%= form.text_area :text, placeholder: "コメントする", class: 'form-control', rows: "5" %>
