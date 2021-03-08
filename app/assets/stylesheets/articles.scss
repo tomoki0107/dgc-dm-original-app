@@ -12,3 +12,11 @@
   background-position: center center;
   height: 380px;
 }
+
+.edge {
+  background:rgba(0,0,0,0.5);
+  text-shadow:1px 1px 0 black, -1px -1px 0 black,
+              -1px 1px 0 black, 1px -1px 0 black,
+              0px 1px 0 black,  0-1px 0 black,
+              -1px 0 0 black, 1px 0 0 black;
+}
