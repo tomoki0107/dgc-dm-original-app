@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = Article.search(params[:keyword]).page(params[:page])
+    @articles = Article.search(params[:keyword]).page(params[:page]).per(10)
   end
   
   private

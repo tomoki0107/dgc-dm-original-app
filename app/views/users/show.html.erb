@@ -29,10 +29,10 @@
       <div class="card pb-3">
         <div class="card-body">
           <h3 class="card-title text-center py-4 co-Item">投稿記事一覧</h3>
-          <% if @user.articles.count == 0 %>
+          <% if @articles.count == 0 %>
             <h5 class="py-4 text-center gray">投稿された記事がありません</h5>
           <% else %>
-            <% @user.articles.each do |article| %>
+            <% @articles.each do |article| %>
               <div class="d-flex pt-3">
                 <div class="px-4 pb-4">
                   投稿者:<%= @user.username %>
@@ -54,6 +54,9 @@
               </div>
             <% end %>
           <% end %>
+        </div>
+        <div class=" d-flex justify-content-center">
+          <%= paginate @articles, theme: 'twitter-bootstrap-4'%>
         </div>
       </div>
     </div>
