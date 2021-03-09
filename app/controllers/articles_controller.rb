@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @articles = Article.includes(:user)
+    @articles = Article.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @article_comment = ArticleComment.new
-    @article_comments  = @article.article_comments.includes(:user)
+    @article_comments  = @article.article_comments.includes(:user).order("created_at DESC")
   end
 
   def edit

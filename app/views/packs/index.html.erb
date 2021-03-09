@@ -1,5 +1,20 @@
-<h1>ガチャシミュレーターTOP</h1>
+<div class="container-fluid mt-4 py-4">
+  <h1 class="text-center py-4">ガチャシミュレーターTOP</h1>
+  <table class="table table-bordered">
+    <thead class="bg-secondary">
+      <tr>
+        <th class="text-light text-center" scope="col" colspan="2">ガチャシミュレーター一覧</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @packs.each do |pack| %>
+        <tr>
+          <th class="text-center" scope="row"><%= image_tag pack.pack_image, size: "66x32" %></th>
+          <td class="text-center align-middle"><%=link_to "#{pack.pack_name}を引く", pack_path(pack) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<% @packs.each do |pack| %>
-  <%=link_to "#{pack.pack_name}を引く", pack_path(pack) %>
-<% end %>
+

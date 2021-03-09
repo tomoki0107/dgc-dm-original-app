@@ -1,3 +1,22 @@
 // Place all the styles related to the articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.header-time {
+  color: #999;
+}
+
+.jumbotron {
+  background-image: image-url("top3.png");
+  background-size: cover;
+  background-position: center center;
+  height: 380px;
+}
+
+.edge {
+  background:rgba(0,0,0,0.5);
+  text-shadow:1px 1px 0 black, -1px -1px 0 black,
+              -1px 1px 0 black, 1px -1px 0 black,
+              0px 1px 0 black,  0-1px 0 black,
+              -1px 0 0 black, 1px 0 0 black;
+}

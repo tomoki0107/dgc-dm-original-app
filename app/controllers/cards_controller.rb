@@ -8,7 +8,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @review = Review.new
     @card_comment = CardComment.new
-    @card_comments  = @card.card_comments.includes(:user)
+    @card_comments  = @card.card_comments.includes(:user).order("created_at DESC")
   end
 
   def search

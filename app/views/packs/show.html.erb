@@ -1,7 +1,28 @@
-リザルト画面
-<% @pack_cards.each do |pack_card| %>
-  <%= image_tag pack_card.card.card_image %>
-  <%= link_to card_path(pack_card.card_id) do %>
-    <%= pack_card.pack_rarity_rate.rarity %>:<%= pack_card.card.name %>
-  <% end %>
-<% end %>
+<div class="container-fluid mt-5">
+  <h1 class="text-center mb-5">リザルト画面</h1>
+  <table class="table table-bordered">
+    <thead class="bg-secondary">
+      <tr>
+        <th class="text-light text-center" scope="col" colspan="2">結果</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <% @pack_cards.each do |pack_card| %>
+        <tr>
+          <th class="text-center" scope="row">
+            <%= link_to card_path(pack_card.card_id) do %>
+              <%= image_tag pack_card.card.card_image, class: "mb-2", size: "40x55" %><br><%= pack_card.pack_rarity_rate.rarity %>
+            <% end %>
+          </th>
+          <td class="text-center align-middle">
+            <%= link_to pack_card.card.name, card_path(pack_card.card_id) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-around py-5">
+    <%= link_to "もう一度引く", pack_path(@pack), class: "btn btn-outline-primary" %>
+    <%= link_to "ガチャシミュレーターTOPへ", packs_path, class: "btn btn-outline-primary" %>
+  </div>
+</div>

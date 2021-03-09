@@ -1,26 +1,78 @@
-<h2><%= @article.title %></h2>
-投稿者:<%= link_to @article.user.username, user_path(@article.user.id) %>
+<div class="container-fluid bg-white mt-5 py-5">
+  <div class="d-flex">
+    <div class="px-4 pb-4">
+      投稿者:<%= link_to @article.user.username, user_path(@article.user.id) %>
+    </div>
+    <div class="header-time">
+      <%= @article.updated_at.strftime("%Y-%m-%d %H:%M") %>に更新
+    </div>
+  </div>
+  <h2 class="pl-4 pb-5 mb-5 co-Item"><%= @article.title %></h2>
 
-<%= link_to "#{@article.title}のデッキレシピのURL", @article.deck_url %>
-<%= @article.content %>
-
-<% if user_signed_in? %>
-  <%= form_with(model: [@article, @article_comment], local: true) do |form| %>
-    <%= form.text_area :text, placeholder: "コメントする" %>
-    <%= form.submit "SEND" %>
-  <% end %>
-<% else %>
-  <strong><p>※ コメントの投稿には新規登録/ログインが必要です ※</p>
-  </strong>
-<% end %>
-
-<h4>＜コメント一覧＞</h4>
-<% @article_comments.each do |comment| %>
-  <p>
-    <strong><%= comment.user.username %>：</strong>
-    <%= comment.text %>
-    <% if user_signed_in? && current_user.id == comment.user.id %>
-      <%= link_to "削除", article_article_comment_path(@article, comment), method: :delete, data: {confirm: "削除しますか？"} %>
+  <div class="card border-dark mb-4 d-block mx-auto">
+    <div class="card-header"><%= link_to "#{@article.title}のデッキレシピはこちら", @article.deck_url %></div>
+    <div class="card-body">
+      <p class="card-text"><%= safe_join(@article.content.split("\n"), tag(:br)) %></p>
+    </div>
+  </div>
+  <div class="text-right pr-5 mr-5">
+    <% if user_signed_in? && current_user.id == @article.user.id %>
+      <%= link_to "編集", edit_article_path(@article), class: "btn btn-success" %>
     <% end %>
-  </p>
-<% end %>
+  </div>
+</div>
+
+<div class="container-fluid my-5 py-2 mw-md">
+  <h4 class="bg-dark text-light my-4 pl-4">コメント</h4>
+  <% if user_signed_in? %>
+    <%= form_with(model: [@article, @article_comment], local: true) do |form| %>
+    
+      <% if @article_comment.errors.any? %>
+      <div class="error-alert">
+        <ul>
+          <% @article_comment.errors.full_messages.each do |message| %>
+          <li class='error-message'><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.text_area :text, placeholder: "コメントする", class: 'form-control', rows: "5" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "コメントを投稿する", class: "btn btn-success btn-block" %>
+      </div>
+    <% end %>
+  <% else %>
+    <strong><p class="text-center">※ コメントの投稿には新規登録/ログインが必要です ※</p>
+    </strong>
+  <% end %>
+
+  <div class="comments">
+    <h5 class="my-4 pl-4">＜コメント一覧＞</h5>
+    <% if @article_comments.count == 0 %>
+      <h5 class="text-center gray">まだコメントがありません</h5>
+    <% else %>
+      <% @article_comments.each do |comment| %>
+        <section class="co-Item">
+          <div class="co-Item_header">
+            <%= link_to comment.user.username, user_path(comment.user) %>
+            <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %>
+          </div>
+          <div class="co-Item_text">
+            <p>
+              <%= safe_join(comment.text.split("\n"), tag(:br)) %>
+            </p>
+          </div>
+          <div class="text-right">
+            <% if user_signed_in? && current_user.id == comment.user.id %>
+              <%= link_to "削除", article_article_comment_path(@article, comment),  class: "delete", method: :delete, data: {confirm: "削除しますか？"} %>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
+    <% end %>
+  </div>
+</div>
