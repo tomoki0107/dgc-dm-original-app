@@ -4,9 +4,12 @@ class Article < ApplicationRecord
 
   with_options presence: true do
     validates :title
-    validates :deck_url
     validates :content
   end
+
+  validates :deck_url, 
+  presence: true,
+  url: { message: 'はURLを入力してください'}
 
   def self.search(keyword)
     if keyword != ""
