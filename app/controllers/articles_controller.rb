@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @articles = Article.includes(:user).order("created_at DESC")
+    @articles = Article.includes(:user).order("created_at DESC").page(params[:page]).per(10)
   end
 
   def new
@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = Article.search(params[:keyword])
+    @articles = Article.search(params[:keyword]).page(params[:page])
   end
   
   private
