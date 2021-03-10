@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
 
   def index
-    @cards = Card.all
+    @cards = Card.all.page(params[:page])
   end
 
   def show
@@ -12,7 +12,7 @@ class CardsController < ApplicationController
   end
 
   def search
-    @cards = Card.search(params[:keyword])
+    @cards = Card.search(params[:keyword]).page(params[:page])
   end
 
 end
