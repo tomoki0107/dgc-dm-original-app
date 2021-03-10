@@ -5,7 +5,7 @@ class Pack < ApplicationRecord
     ids = records.pluck(:id)
     weights = records.pluck(:weight)
     total_weight = weights.inject(:+)
-    pick = nil
+    pick = 0
     rnd = rand(total_weight)
   
     weights.each_with_index do |item, i|
