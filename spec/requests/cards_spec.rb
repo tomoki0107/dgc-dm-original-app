@@ -6,38 +6,43 @@ describe CardsController, type: :request do
   end
 
   describe 'GET #index' do
+    context 'カードが存在するとき' do
 
     before do
       get cards_path
     end
 
-    it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
-      expect(response.status).to eq 200
-    end
-    it 'indexアクションにリクエストするとレスポンスにカード名が存在する' do 
-      expect(response.body).to include(@card.name)
-    end
-    it 'indexアクションにリクエストするとレスポンスにカードの文明が存在する' do 
-      expect(response.body).to include(@card.civilization)
-    end
-    it 'indexアクションにリクエストするとレスポンスにカードのコストが存在する' do 
-      expect(response.body).to include(@card.cost)
-    end
-    it 'indexアクションにリクエストするとレスポンスにカードのレア度が存在する' do 
-      expect(response.body).to include(@card.rarity)
-    end
-    it 'indexアクションにリクエストするとレスポンスにカードの画像(URL)が存在する' do 
-      expect(response.body).to include(@card.card_image)
-    end
-    it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
-      expect(response.body).to include('カードを検索する')
-    end
-
-    describe 'GET #show' do
-
-      before do
-        get card_path(@card)
+      it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
+        expect(response.status).to eq 200
       end
+      it 'indexアクションにリクエストするとレスポンスにカード名が存在する' do 
+        expect(response.body).to include(@card.name)
+      end
+      it 'indexアクションにリクエストするとレスポンスにカードの文明が存在する' do 
+        expect(response.body).to include(@card.civilization)
+      end
+      it 'indexアクションにリクエストするとレスポンスにカードのコストが存在する' do 
+        expect(response.body).to include(@card.cost)
+      end
+      it 'indexアクションにリクエストするとレスポンスにカードのレア度が存在する' do 
+        expect(response.body).to include(@card.rarity)
+      end
+      it 'indexアクションにリクエストするとレスポンスにカードの画像(URL)が存在する' do 
+        expect(response.body).to include(@card.card_image)
+      end
+      it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
+        expect(response.body).to include('カードを検索する')
+      end
+
+    end
+  end
+
+  describe 'GET #show' do 
+    context 'カードが存在するとき' do
+
+    before do
+      get card_path(@card)
+    end  
 
       it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do 
         expect(response.status).to eq 200
@@ -72,6 +77,7 @@ describe CardsController, type: :request do
       it 'showアクションにリクエストするとレスポンスにコメント一覧表示部分が存在する' do 
         expect(response.body).to include('＜コメント一覧＞')
       end
+      
     end
-  end
+  end 
 end
