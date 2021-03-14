@@ -6,12 +6,10 @@ describe CardsController, type: :request do
   end
 
   describe 'GET #index' do
-    context 'カードが存在するとき' do
-
     before do
       get cards_path
     end
-
+    context 'カードが存在するとき' do
       it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
         expect(response.status).to eq 200
       end
@@ -33,17 +31,20 @@ describe CardsController, type: :request do
       it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
         expect(response.body).to include('カードを検索する')
       end
+    end
 
+    context 'カードが存在しないとき' do
+      it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
+        expect(response.body).to include('カードを検索する')
+      end
     end
   end
 
   describe 'GET #show' do 
-    context 'カードが存在するとき' do
-
     before do
       get card_path(@card)
-    end  
-
+    end
+    context 'カードが存在するとき' do  
       it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do 
         expect(response.status).to eq 200
       end
@@ -77,7 +78,12 @@ describe CardsController, type: :request do
       it 'showアクションにリクエストするとレスポンスにコメント一覧表示部分が存在する' do 
         expect(response.body).to include('＜コメント一覧＞')
       end
-      
+    end
+
+    context 'カードが存在しないとき' do
+      it 'showアクションにリクエストするとレスポンスにコメント一覧表示部分が存在する' do 
+        expect(response.body).to include('＜コメント一覧＞')
+      end
     end
   end 
 end

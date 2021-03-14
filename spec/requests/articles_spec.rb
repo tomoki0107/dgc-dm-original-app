@@ -6,12 +6,11 @@ describe ArticlesController, type: :request do
   end
 
   describe 'GET #index' do
-    context '記事が存在するとき' do
-
     before do
       get root_path
     end
-
+    
+    context '記事が存在するとき' do
       it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
         expect(response.status).to eq 200
       end
@@ -24,17 +23,21 @@ describe ArticlesController, type: :request do
       it 'indexアクションにリクエストするとレスポンスに投稿検索フォームが存在する' do 
         expect(response.body).to include('投稿を検索する')
       end
+    end
 
+    context '記事が存在しないとき' do
+      it 'indexアクションにリクエストするとレスポンスに投稿検索フォームが存在する' do 
+        expect(response.body).to include('投稿を検索する')
+      end
     end
   end
 
   describe 'GET #show' do
-    context '記事が存在するとき' do
-
     before do
       get article_path(@article)
     end
-
+    
+    context '記事が存在するとき' do
       it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do 
         expect(response.status).to eq 200
       end
@@ -50,7 +53,12 @@ describe ArticlesController, type: :request do
       it 'showアクションにリクエストするとレスポンスにコメント一覧表示部分が存在する' do 
         expect(response.body).to include('＜コメント一覧＞')
       end
+    end
 
+    context '記事が存在しないとき' do
+      it 'showアクションにリクエストするとレスポンスにコメント一覧表示部分が存在する' do 
+        expect(response.body).to include('＜コメント一覧＞')
+      end
     end
   end 
 end
