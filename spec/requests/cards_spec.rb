@@ -7,42 +7,34 @@ describe CardsController, type: :request do
     before do
       get cards_path
     end
-    context 'カードが存在するとき' do
-      it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
-        expect(response.status).to eq 200
-      end
-      it 'indexアクションにリクエストするとレスポンスにカード名が存在する' do 
-        expect(response.body).to include(card.name)
-      end
-      it 'indexアクションにリクエストするとレスポンスにカードの文明が存在する' do 
-        expect(response.body).to include(card.civilization)
-      end
-      it 'indexアクションにリクエストするとレスポンスにカードのコストが存在する' do 
-        expect(response.body).to include(card.cost)
-      end
-      it 'indexアクションにリクエストするとレスポンスにカードのレア度が存在する' do 
-        expect(response.body).to include(card.rarity)
-      end
-      it 'indexアクションにリクエストするとレスポンスにカードの画像(URL)が存在する' do 
-        expect(response.body).to include(card.card_image)
-      end
-      it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
-        expect(response.body).to include('カードを検索する')
-      end
+    it 'indexアクションにリクエストすると正常にレスポンスが返ってくる' do 
+      expect(response.status).to eq 200
     end
-
-    context 'カードが存在しないとき' do
-      it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
-        expect(response.body).to include('カードを検索する')
-      end
+    it 'indexアクションにリクエストするとレスポンスにカード名が存在する' do 
+      expect(response.body).to include(card.name)
+    end
+    it 'indexアクションにリクエストするとレスポンスにカードの文明が存在する' do 
+      expect(response.body).to include(card.civilization)
+    end
+    it 'indexアクションにリクエストするとレスポンスにカードのコストが存在する' do 
+      expect(response.body).to include(card.cost)
+    end
+    it 'indexアクションにリクエストするとレスポンスにカードのレア度が存在する' do 
+      expect(response.body).to include(card.rarity)
+    end
+    it 'indexアクションにリクエストするとレスポンスにカードの画像(URL)が存在する' do 
+      expect(response.body).to include(card.card_image)
+    end
+    it 'indexアクションにリクエストするとレスポンスにカード検索フォームが存在する' do 
+      expect(response.body).to include('カードを検索する')
     end
   end
 
   describe 'GET #show' do 
-    before do
-      get card_path(card)
-    end
     context 'カードが存在するとき' do  
+      before do
+        get card_path(card)
+      end
       it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do 
         expect(response.status).to eq 200
       end
@@ -79,8 +71,9 @@ describe CardsController, type: :request do
     end
 
     context 'カードが存在しないとき' do
-      it 'showアクションにリクエストするとレスポンスにコメント一覧表示部分が存在する' do 
-        expect(response.body).to include('＜コメント一覧＞')
+      let(:card_id) { 999999 }
+      it 'showアクションにリクエストするとカードidが見つからない' do
+        expect { get card_path(card_id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end 
