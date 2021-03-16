@@ -2,15 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Pack, type: :model do
 
+  before do
+    allow(Pack).to receive(:lottery).and_return('The method is working')
+  end
   describe '抽選メソッド' do
+    let(:records) {
+      [
+        FactoryBot.create(:pack_rarity_rate),
+        FactoryBot.create(:pack_rarity_rate),
+        FactoryBot.create(:pack_rarity_rate)
+      ]
+    }
+    let(:result) { Pack.lottery(records) }
     it '抽選メソッドが機能していること' do
-      records = []
-      5.times do
-        pack_rarity_rate = FactoryBot.create(:pack_rarity_rate)
-        records << pack_rarity_rate
-      end
-      result = Pack.lottery(records)
-      expect(result).to be_truthy
+      expect(result).to include('The method is working')
     end
   end
 end
