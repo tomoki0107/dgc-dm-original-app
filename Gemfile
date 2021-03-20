@@ -66,3 +66,4 @@ gem 'mini_magick'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'validate_url'
+gem "aws-sdk-s3", require: false
