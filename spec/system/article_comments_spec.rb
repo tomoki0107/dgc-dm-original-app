@@ -4,7 +4,7 @@ RSpec.describe 'コメント投稿(記事詳細画面)', type: :system do
   let(:article) { FactoryBot.create(:article) }
   let(:comment) { Faker::Lorem.sentence }
 
-  context 'コメントができるとき' do
+  context 'ログインをしているとき' do
     it 'ログインしたユーザーは記事詳細ページでコメント投稿できる' do
       sign_in(article.user)
       visit article_path(article)
@@ -17,7 +17,7 @@ RSpec.describe 'コメント投稿(記事詳細画面)', type: :system do
     end
   end
 
-  context 'コメントができないとき' do
+  context 'ログインをしていないとき' do
     it 'ログインしていないユーザーは記事詳細ページでコメント投稿ができない' do
       visit article_path(article)
       expect(page).to have_no_selector '.form-group'

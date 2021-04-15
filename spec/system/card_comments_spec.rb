@@ -5,7 +5,7 @@ RSpec.describe 'コメント投稿(カード詳細画面)', type: :system do
   let(:card) { FactoryBot.create(:card) }
   let(:comment) { Faker::Lorem.sentence }
 
-  context 'コメントができるとき' do
+  context 'ログインをしているとき' do
     it 'ログインしたユーザーはカード詳細ページでコメント投稿できる' do
       sign_in(user)
       visit card_path(card)
@@ -18,7 +18,7 @@ RSpec.describe 'コメント投稿(カード詳細画面)', type: :system do
     end
   end
 
-  context 'コメントができないとき' do
+  context 'ログインをしていないとき' do
     it 'ログインしていないユーザーはカード詳細ページでコメント投稿ができない' do
       visit card_path(card)
       expect(page).to have_no_selector '.form-group'

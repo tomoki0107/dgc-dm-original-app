@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe '記事投稿', type: :system do
   let(:article) { FactoryBot.create(:article) }
   
-  context '記事投稿ができるとき'do
+  context 'ログインをしているとき'do
     it 'ログインしたユーザーは新規投稿できる' do
       sign_in(article.user)
       expect(page).to have_content('新規投稿')
@@ -20,7 +20,7 @@ RSpec.describe '記事投稿', type: :system do
     end
   end
 
-  context '記事投稿ができないとき'do
+  context 'ログインをしていないとき'do
     it 'ログインしていないと新規投稿ページに遷移できない' do
       visit root_path
       expect(page).to have_no_content('新規投稿')
@@ -32,7 +32,7 @@ RSpec.describe '記事編集', type: :system do
   let(:article1) { FactoryBot.create(:article) }
   let(:article2) { FactoryBot.create(:article) }
 
-  context '記事が編集ができるとき' do
+  context 'ログインをしているとき' do
     it 'ログインしたユーザーは自分が投稿した記事の編集ができる' do
       sign_in(article1.user)
       visit user_path(article1.user)
@@ -58,7 +58,7 @@ RSpec.describe '記事編集', type: :system do
     end
   end
 
-  context '記事が編集ができないとき' do
+  context 'ログインをしていないとき' do
     it 'ログインしたユーザーは自分以外が投稿した記事の編集画面には遷移できない' do
       sign_in(article1.user)
       visit user_path(article2.user)
@@ -77,7 +77,7 @@ RSpec.describe '記事削除', type: :system do
   let(:article1) { FactoryBot.create(:article) }
   let(:article2) { FactoryBot.create(:article) }
 
-  context '記事が削除ができるとき' do
+  context 'ログインをしているとき' do
     it 'ログインしたユーザーは自らが投稿した記事の削除ができる' do
       sign_in(article1.user)
       visit user_path(article1.user)
@@ -90,14 +90,14 @@ RSpec.describe '記事削除', type: :system do
       }.to change { Article.count }.by(-1)
       expect(page).to have_no_content(article1.title)
     end
-  end
-
-  context '記事が削除ができないとき' do
     it 'ログインしたユーザーは自分以外が投稿した記事の削除ができない' do
       sign_in(article1.user)
       visit user_path(article2.user)
       expect(page).to have_no_link '削除', href: article_path(article2)
     end
+  end
+
+  context 'ログインをしていないとき' do
     it 'ログインしていないと記事の削除ボタンがない' do
       visit user_path(article1.user)
       expect(page).to have_no_link '削除', href: article_path(article1)
@@ -110,7 +110,7 @@ end
 RSpec.describe '記事詳細', type: :system do
   let(:article) { FactoryBot.create(:article) }
 
-  context '記事詳細画面(コメント投稿欄有)'do
+  context 'ログインをしているとき'do
     it 'ログインしたユーザーは記事詳細ページに遷移してコメント欄が表示される' do
       sign_in(article.user)
       visit article_path(article)
@@ -120,7 +120,7 @@ RSpec.describe '記事詳細', type: :system do
     end
   end
 
-  context '記事詳細画面(コメント投稿欄有)'do
+  context 'ログインをしていないとき'do
     it 'ログインしていない状態で記事詳細ページに遷移するとコメント欄が表示されない' do
       visit article_path(article)
       expect(page).to have_content(article.title)
