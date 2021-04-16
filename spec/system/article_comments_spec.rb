@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'コメント投稿(記事詳細画面)', type: :system do
   let(:article) { FactoryBot.create(:article) }
   let(:comment) { Faker::Lorem.sentence }

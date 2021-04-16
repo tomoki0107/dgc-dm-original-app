@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe '記事投稿', type: :system do
   let(:article) { FactoryBot.create(:article) }
   

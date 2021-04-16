@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Pack, type: :model do
 
   let(:pack) { FactoryBot.create(:pack_with_pack_rarity_rate) }

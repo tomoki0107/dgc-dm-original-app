@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'コメント投稿(カード詳細画面)', type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:card) { FactoryBot.create(:card) }
