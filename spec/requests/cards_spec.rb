@@ -1,4 +1,3 @@
-require 'rails_helper'
 describe CardsController, type: :request do
 
   let!(:card) { FactoryBot.create(:card) }

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Article, type: :model do
   describe '投稿の保存' do
     let!(:article) { FactoryBot.create(:article) }

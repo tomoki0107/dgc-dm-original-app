@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe User, type: :model do
   describe 'ユーザーの新規登録' do
     let!(:user) { FactoryBot.create(:user) }

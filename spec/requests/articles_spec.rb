@@ -1,4 +1,3 @@
-require 'rails_helper'
 describe ArticlesController, type: :request do
 
   let!(:article) { FactoryBot.create(:article) }
